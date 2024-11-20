@@ -36,7 +36,8 @@ I will create a pet simulator. I could make different pets (dog, cat, bunny...) 
 5. << character with multiple expressions >>
 
 ### Classes
-
+Animal: defines the pet and the actions it can do
+Habitat: Creates the background
 - << You should have a list of each of your classes with a description >>
 
 ## ATP
