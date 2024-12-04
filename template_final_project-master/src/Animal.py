@@ -1,59 +1,105 @@
-class Animal:
-    def __init__ (self, x, y, anim_img):
+import pygame
+
+class Animal(pygame.sprite.Sprite):
+    
+    def __init__(self, x, y, name, anim_img, ground):
         """
         Initializes animal object
 
         Args:
-            x (int): starting x coordinate
-            y (int): starting y coordinate
-            anim_img (str): path to img file
+            x (int): x position of the animal
+            y (int): y position of the animal
+            name (str): name of animal
+            anim_img (str): path to animal image
+            ground (int): ground level coordinate
         """
-        self.x = abs(x)
-        self.y = abs(y)
-        self.img = anim_img
-        self.health = 100
-        self.hunger = 0
+        super().__init__()
+        self.initial_jump_velocity = -15
+        self.x = x
+        self.y = y
+        self.name = name
+        self.anim_img = anim_img
+        self.ground = ground
+
+        self.image = pygame.image.load(anim_img)  
+        self.image = pygame.transform.scale(self.image, (70, 70))  
+        self.rect = self.image.get_rect(topleft=(x, y)) 
+        
         self.energy = 100
-        self.happiness = 0
+        self.happiness = 100
+        self.hunger = 10
+        self.is_jumping = False
+        self.jump_speed = -15
+        self.gravity = 1
+        self.jump_height = 100
+        self.move_up = 0
+        self.money = 0
+        self.jump_count = 0
+        self.max_jump_count = 10
+
+        self.hunger_interval = 7000
+        self.hunger_lapse = pygame.time.get_ticks()
         
         
-    def move_right(self):
-        """
-        moves position right by 1
-        """
-        pass
-    
-    def move_left(self):
-        """
-        moves position left by 1
-        """
-        pass
-    
     def jump(self):
         """
-        moves position up and down by 1
+        starts a jump
         """
-        pass
-    
-    def feed(self,food):
-        """
-        Lower hunger and increase health based on food
+        if not self.is_jumping: 
+            self.is_jumping = True
+            self.move_up = self.initial_jump_velocity * 1.5
 
-        Args:
-            food (str): type of food given to the pet
+    def is_animal_alive(self):
         """
-        pass
-    
-    def play (self):
+        checks the animals statistics to make sure it is still alive
+
+        Returns:
+            boolean: if the animal is alive
         """
-        Increases happiness, decreases energy
+        if self.hunger > 100 or self.happiness < 0 or self.energy < 0:
+                return False
+        else:
+            return True
+
+    def feed(self, food, food_cost):
         """
-        pass
-    
-    def stats(self):
+        checks to see if play has enough to feed and changes stats if they do
         """
-        Updates the pets stats as actions happen
+        if self.money >= food_cost:
+                self.hunger -= 10
+                self.energy += 10
+                self.money -= 5
+
+    def play(self):
         """
-        pass
-    
+        checks to see if the animal has enough energy to play and changes stats if it does
+        """
+        if self.energy > 10:
+            self.energy -= 10
+            self.happiness += 20
+            self.hunger += 10
+            
+    def update(self):
+        """
+        updates the jump and stat functions of the animal
+        """
+        if self.is_jumping:      
+                self.move_up += self.gravity
+                self.rect.y += self.move_up
+                self.jump_count += 1
+      
+        if self.rect.y >= self.ground:
+            self.rect.y = self.ground
+            self.is_jumping = False
+            self.jump_count = 0
+                
+        current_time = pygame.time.get_ticks()
         
+        if not self.is_animal_alive():
+            return False
+        
+        if (current_time - self.hunger_lapse) >= self.hunger_interval:
+            self.hunger += 2
+            self.hunger_lapse = current_time
+            self.happiness -= 2
+        return True
