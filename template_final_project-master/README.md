@@ -105,5 +105,4 @@ Test 5: feed functionality
         6. die by colliding with a trash can or cloud
         7. press feed
         8. verify that the hunger decreases by 10
-
     Expected outcome: pressing a key 1-4 should allow you to pick an answer choice equivalent to it and tell you if it is correct
