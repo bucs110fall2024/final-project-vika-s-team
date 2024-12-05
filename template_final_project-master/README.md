@@ -20,7 +20,7 @@ This is a virtual pet simulator. There are three different pets, each with a dif
 
 ### Final Design
 
-![final gui](assets/finalgui.jpg)
+![final gui](assets/finalgui.png)
 
 ## Program Design
 
