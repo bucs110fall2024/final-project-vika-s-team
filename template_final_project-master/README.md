@@ -5,8 +5,6 @@
 
 Victoria Berfirer
 
-***
-
 ## Project Description
 
 This is a virtual pet simulator. There are three different pets, each with a different image. The goal is to keep the pet alive by continuously feeding it and keeping it happy. If the user chooses to walk the dog, it opens up a really simple scrolling game where the user collects money to feed the dog. The "play" feature opens a trivia game. These features both earn the user money that they can use to feed the dog and keep it alive.
@@ -43,7 +41,7 @@ Obstacle: creates the obstacles that are used in the scrolling game
 Text: creates a program to make text appear on the screen
 Play: calls and implements the API to create the trivia game
 
-###
+### ADDITIONAL MODULES
 pip install requests (Pypi)
 
 
