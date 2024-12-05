@@ -202,13 +202,15 @@ class Controller:
         while self.state == 'start' and self.running:
             self.screen.fill(WHITE)
             self.text = Text(self.screen)
-            self.text.print_message(message = "Welcome to you pet simulator!", x = 400, y = 80)
-            self.text.print_message(message = "After you choose a pet, you are responsible for keeping it alive", x = 400, y = 100)
-            self.text.print_message(message = "The pet will die if its hunger reaches above 100, or if its happiness and energy dip below 0", x = 400, y = 120)
-            self.text.print_message(message = "The hunger goes up by 2 every 2 seconds", x = 400, y = 140)
-            self.text.print_message(message = "You will have to feed the pet to keep it from starving with money you earn by walking the pet or playing with it", x = 400, y = 160)
-            self.text.print_message(message = "Good luck!", x = 400, y = 180)
-            self.text.print_message(message = "(This message will automatically disappear)", x = 400, y = 200)
+            x = 400
+            y = 80
+            self.text.print_message(message = "Welcome to you pet simulator!", x = x, y = y )
+            self.text.print_message(message = "After you choose a pet, you are responsible for keeping it alive", x = x, y  = y + 20)
+            self.text.print_message(message = "The pet will die if its hunger reaches above 100, or if its happiness and energy dip below 0", x = x, y  = y + 40)
+            self.text.print_message(message = "The hunger goes up by 2 every 2 seconds", x = x, y = y + 60)
+            self.text.print_message(message = "You will have to feed the pet to keep it from starving with money you earn by walking the pet or playing with it", x = x, y = y + 80)
+            self.text.print_message(message = "Good luck!", x = x, y = y+100)
+            self.text.print_message(message = "(This message will automatically disappear)", x = x, y = y + 120)
             pygame.display.flip()
 
             for event in pygame.event.get():
